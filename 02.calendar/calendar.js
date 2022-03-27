@@ -1,6 +1,6 @@
 function print_calendar(month, year){
     print_header(month, year);
-    const first_day_of_month = new Date(year, month - 1, 0);
+    const first_day_of_month = new Date(year, month - 1, 1);
     console.log(first_day_of_month)
     const first_wday = first_day_of_month.getDay();
     console.log(' ' * 4 * first_wday);
