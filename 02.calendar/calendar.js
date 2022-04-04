@@ -1,31 +1,42 @@
 function print_calendar(month, year){
     print_header(month, year);
-    const first_day_of_month = new Date(year, month - 1, 1);
-    console.log(first_day_of_month)
+    const first_day_of_month = new Date(year, month -1, 1);
     const first_wday = first_day_of_month.getDay();
-    console.log(' ' * 4 * first_wday);
-    const last_day_of_month = new Date(year, month - 1, 0);
+    const last_day_of_month = new Date(year, month, 0);
     const dates = getDates(first_day_of_month, last_day_of_month);
-    console.log(dates)
+    let str =  '   '.repeat(first_wday) + (first_wday>2?' '.repeat(first_wday-2):'')
     dates.forEach(day => {
-        console.log(day.getDate().toString().padEnd(4));
-        if(day.getDay() === 6){
-            console.log("\n");
+        if(day.getDay() != 0 && day != first_day_of_month){
+            str += '  ';
+        }
+        if(day.getDate() < 10){
+          str += day.getDate().toString();
+          str += ' '
+        }
+        else str += day.getDate().toString();
+        if(day.getDay() == 6){
+            str += "\n";
         }
     })
+    console.log(str)
 }
 
 function print_header(month, year){
     console.log(`${month}月 ${year}年`);
-    console.log('日  月  火  水  木  金  土  ');
+    console.log('日  月  火  水  木  金  土');
 }
 
 function getDates(startDate, endDate) {
     const duration = endDate - startDate;
-    console.log(duration)
     const interval = 1000 * 60 * 60 * 24;
     const steps = duration / interval;
     return Array.from({length: steps+1}, (v,i) => new Date(startDate.valueOf() + (interval * i)));
 }
 
-print_calendar(3, 2022)
+const dayjs = require('dayjs')
+const now = dayjs()
+const argv = require('minimist')(process.argv.slice(2));
+const month = argv.m || now.month() + 1;
+const year = argv.y || now.year();
+
+print_calendar(month, year)
