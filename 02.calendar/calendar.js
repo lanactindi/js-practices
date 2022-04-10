@@ -31,7 +31,7 @@ function getDates(startDate, endDate) {
     const duration = endDate - startDate;
     const interval = 1000 * 60 * 60 * 24;
     const steps = duration / interval;
-    return Array.from({length: steps+1}, (v,i) => new Date(startDate.valueOf() + (interval * i)));
+    return Array.from({length: steps+1}, (v, i) => new Date(startDate.valueOf() + (interval * i)));
 }
 
 const dayjs = require('dayjs')
