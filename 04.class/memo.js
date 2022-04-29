@@ -1,7 +1,4 @@
 const fs = require('fs');
-const file = require('./prompt');
-const { title } = require('process');
-const inquirer = require('inquirer');
 const uuid = require('uuid');
 class Memo {
     constructor(){
