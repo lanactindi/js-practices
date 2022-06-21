@@ -4,10 +4,11 @@ function printCalendar(month, year) {
     const firstWday = firstDayOfMonth.getDay();
     const lastDayOfMonth = new Date(year, month, 0);
     const dates = getDates(firstDayOfMonth, lastDayOfMonth);
-    let str = '   '.repeat(firstWday) + (firstWday > 2 ? ' '.repeat(firstWday - 2) : '')
+    let str = '  '.repeat(firstWday) + (firstWday > 3 ? ' '.repeat(firstWday/2
+      + (firstWday == 4 ? 1 : 2)) : ' '.repeat(firstWday == 1 ? 0 : Math.round(firstWday/2)))
     dates.forEach(day => {
         if (day.getDay() !== 0 && day !== firstDayOfMonth) {
-            str += '  ';
+            str += ' ';
         }
         if (day.getDate() < 10) {
             str += ' ' + day.getDate().toString();
@@ -22,8 +23,8 @@ function printCalendar(month, year) {
 }
 
 function printHeader(month, year) {
-    console.log(`        ${month}月 ${year}年`);
-    console.log('日  月  火  水  木  金  土');
+    console.log(`      ${month}月 ${year}年`);
+    console.log('日 月 火 水 木 金 土');
 }
 
 function getDates(startDate, endDate) {
