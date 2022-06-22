@@ -4,8 +4,7 @@ function printCalendar(month, year) {
     const firstWday = firstDayOfMonth.getDay();
     const lastDayOfMonth = new Date(year, month, 0);
     const dates = getDates(firstDayOfMonth, lastDayOfMonth);
-    let str = '  '.repeat(firstWday) + (firstWday > 3 ? ' '.repeat(firstWday/2
-      + (firstWday == 4 ? 1 : 2)) : ' '.repeat(firstWday == 1 ? 0 : Math.round(firstWday/2)))
+    let str = firstWday==0? '' : '  ' + '   '.repeat(firstWday - 1)
     dates.forEach(day => {
         if (day.getDay() !== 0 && day !== firstDayOfMonth) {
             str += ' ';
