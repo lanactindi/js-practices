@@ -2,16 +2,17 @@ function printCalendar(month, year) {
   printHeader(month, year);
   const firstDayOfMonth = new Date(year, month - 1, 1);
   const firstWday = firstDayOfMonth.getDay();
-  const LastDayofPmonth = new Date(year, month - 1, -firstWday + 1);
-  const lastDayOfMonth = new Date(year, month, 0);
-  const dates = getDates(LastDayofPmonth, lastDayOfMonth);
-  str = "";
+  const lastDayOfPreviousMonth = new Date(year, month - 1, -firstWday + 1);
+  const lastDayOfCurrentMonth = new Date(year, month, 0);
+  const dates = getDates(lastDayOfPreviousMonth, lastDayOfCurrentMonth);
+  let str = "";
   dates.forEach((day, index) => {
-    if (day.getDay() !== 0 && day !== firstDayOfMonth) {
+    if (day.getDay() !== 0) {
       str += " ";
     }
     if (day.getDate() < 10) {
-      str += " " + day.getDate().toString();
+      const dateStr = day.getDate().toString();
+      str += dateStr.padStart(dateStr.length + 1);
     } else {
       if (index < firstWday) {
         str += "  ";
@@ -43,10 +44,9 @@ function getDates(startDate, endDate) {
   );
 }
 
-const dayjs = require("dayjs");
-const now = dayjs();
 const argv = require("minimist")(process.argv.slice(2));
-const month = argv.m || now.month() + 1;
-const year = argv.y || now.year();
+const date = new Date();
+const month = argv.m || date.getMonth() + 1;
+const year = argv.y || date.getFullYear();
 
 printCalendar(month, year);
