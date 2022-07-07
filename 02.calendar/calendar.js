@@ -10,15 +10,10 @@ function printCalendar(month, year) {
     if (day.getDay() !== 0) {
       str += " ";
     }
-    if (day.getDate() < 10) {
-      const dateStr = day.getDate().toString();
-      str += dateStr.padStart(dateStr.length + 1);
+    if (index < firstWday) {
+      str += "  ";
     } else {
-      if (index < firstWday) {
-        str += "  ";
-      } else {
-        str += day.getDate().toString();
-      }
+      str += day.getDate().toString().padStart(2);
     }
     if (day.getDay() === 6) {
       str += "\n";
